@@ -1,0 +1,42 @@
+<div class="col-md-12 col-lg-6 col-xl-5">
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-4">
+                    <img class="img-fluid" src="{{col.photoUrl}}"
+                         alt="photo">
+                </div>
+                <div class="col-8">
+                    <dl class="row">
+                    <dt class="col-sm-3 col-xl-4">Matricule</dt>
+                    <dd class="col-sm-9 col-xl-8">{{col.matricule}}</dd>
+
+                    <dt class="col-sm-3 col-xl-4">Nom</dt>
+                    <dd class="col-sm-9 col-xl-8">{{col.nom}}</dd>
+
+                    <dt class="col-sm-3 col-xl-4">Prénoms</dt>
+                    <dd class="col-sm-9 col-xl-8">{{col.prenoms}}</dd>
+
+                    <dt class="col-sm-3 col-xl-4">Date de naissance</dt>
+                    <dd class="col-sm-9 col-xl-8">{{col.dateDeNaissance.toDateString()}}</dd>
+
+                    <dt class="col-sm-3 col-xl-4">Email</dt>
+                    <dd class="col-sm-9 col-xl-8">{{col.email}}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-4 text-right m-2">
+                <a href="#" (click)="addNewCollegue()">Créer un nouveau collègue</a>
+            </div>
+            <div class="col text-right m-2">
+                <button type="button" class="btn btn-dark" (click)="updateCollegue(col)">Editer</button>
+            </div>
+        </div>
+    </div>
+
+</div>
