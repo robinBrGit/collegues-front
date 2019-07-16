@@ -5,6 +5,24 @@
     <title>{{title}}</title>
 </head>
 <body>
-<app-collegue [col]="unCollegue"></app-collegue>
+<div class="container-fluid">
+    <div class="container mt-3 mb-5">
+        <h1 class="text-center">Administration Collegue</h1>
+    </div>
+    <div class="container-fluid">
+        <div class="row m-2">
+            <div class="col-xl-6">
+                <app-recherche-collegue-par-nom></app-recherche-collegue-par-nom>
+            </div>
+            <div class="col-xl-6">
+                <app-collegue [col]="unCollegue"></app-collegue>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
 </body>
 </html>
