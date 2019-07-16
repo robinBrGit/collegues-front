@@ -10,31 +10,52 @@
                 </div>
                 <div class="col-8">
                     <dl class="row">
-                    <dt class="col-sm-3 col-xl-4">Matricule</dt>
-                    <dd class="col-sm-9 col-xl-8">{{col.matricule}}</dd>
+                        <dt class="col-sm-3 col-xl-4">Matricule</dt>
+                        <dd class="col-sm-9 col-xl-8">{{col.matricule}}</dd>
 
-                    <dt class="col-sm-3 col-xl-4">Nom</dt>
-                    <dd class="col-sm-9 col-xl-8">{{col.nom}}</dd>
+                        <dt class="col-sm-3 col-xl-4">Nom</dt>
+                        <dd class="col-sm-9 col-xl-8">{{col.nom | uppercase}}</dd>
 
-                    <dt class="col-sm-3 col-xl-4">Prénoms</dt>
-                    <dd class="col-sm-9 col-xl-8">{{col.prenoms}}</dd>
+                        <dt class="col-sm-3 col-xl-4">Prénoms</dt>
+                        <dd class="col-sm-9 col-xl-8">{{col.prenoms}}
 
-                    <dt class="col-sm-3 col-xl-4">Date de naissance</dt>
-                    <dd class="col-sm-9 col-xl-8">{{col.dateDeNaissance.toDateString()}}</dd>
+                        <dt class="col-sm-3 col-xl-4">Date de naissance</dt>
+                        <dd class="col-sm-9 col-xl-8">{{col.dateDeNaissance | date:'dd/MM/yyyy'}}</dd>
+                        <div *ngIf="isUpdate; then updateBlock else readBlock"></div>
 
-                    <dt class="col-sm-3 col-xl-4">Email</dt>
-                    <dd class="col-sm-9 col-xl-8">{{col.email}}</dd>
+                        <ng-template #updateBlock>
+                            <dt class="col-sm-3 col-xl-4">Email</dt>
+                            <dd class="col-sm-9 col-xl-8"><input type="email" class="form-control" name="email" id="email"></dd>
+
+                            <dt class="col-sm-3 col-xl-4">Photo Url</dt>
+                            <dd class="col-sm-9 col-xl-8"><input type="text" class="form-control" name="urlPhoto" id="urlPhoto"></dd>
+
+                        </ng-template>
+
+                        <ng-template #readBlock>
+                            <dt class="col-sm-3 col-xl-4">Email</dt>
+                            <dd class="col-sm-9 col-xl-8">{{col.email}}</dd>
+                        </ng-template>
+
+
                     </dl>
                 </div>
             </div>
         </div>
         <div class="row">
 
-            <div class="col-4 text-right m-2">
+            <div class="col-4 text-right m-2" *ngIf="!isUpdate">
                 <a href="#" (click)="addNewCollegue()">Créer un nouveau collègue</a>
             </div>
             <div class="col text-right m-2">
-                <button type="button" class="btn btn-dark" (click)="updateCollegue(col)">Editer</button>
+                <div *ngIf="isUpdate;then validateButton else updateButton"></div>
+                <ng-template #updateButton>
+                    <button type="button" class="btn btn-dark" (click)="updateCollegue(col)">Editer</button>
+                </ng-template>
+                <ng-template #validateButton>
+                    <button type="button" class="btn btn-dark" (click)="validateCollegue()">Valider</button>
+                </ng-template>
+
             </div>
         </div>
     </div>

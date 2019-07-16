@@ -9,6 +9,8 @@ export class CollegueComponent implements OnInit {
 
   @Input() col:Collegue;
 
+  isUpdate:boolean = false;
+
   constructor() { }
 
   ngOnInit() {
@@ -19,7 +21,11 @@ export class CollegueComponent implements OnInit {
   }
 
   updateCollegue(col:Collegue){
-    console.log("Modification du collègue");
+    this.isUpdate = true;
+  }
+
+  validateCollegue(){
+    this.isUpdate = false;
   }
 
 }
