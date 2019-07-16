@@ -2,7 +2,7 @@
     <div class="col-sm-12 col-xl-12">
         <form class="form-inline">
             <label class="col-sm-3 col-form-label col-form-label" for="findByName">Recherche par nom :</label>
-            <input type="text" class="col-sm-5 form-control mb-2 mr-sm-2" id="findByName" #saisie placeholder="Thomas">
+            <input type="text" class="col-sm-5 form-control mb-2 mr-sm-2" (keydown.enter)="rechercher(saisie.value); $event.preventDefault()" id="findByName" #saisie placeholder="Thomas">
             <button type="button" class="col-sm-3 btn btn-primary mb-2" (click)="rechercher(saisie.value)">Rechercher</button>
         </form>
     </div>
@@ -14,5 +14,10 @@
                 <li *ngFor="let matricule of tabMatricule" class="list-group-item">{{matricule}}</li>
             </div>
         </ul>
+        <div *ngIf="errorRecherche">
+            <div class="alert alert-primary" role="alert">
+                Collegue introuvable
+            </div>
+        </div>
     </div>
 </div>

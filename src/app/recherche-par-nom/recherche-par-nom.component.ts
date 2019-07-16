@@ -8,15 +8,21 @@ import {tabMatricule} from "../mock/matricules.mock";
 export class RechercheParNomComponent implements OnInit {
 
   tabMatricule:any;
+  errorRecherche:boolean = false;
   constructor() { }
 
   ngOnInit() {
   }
 
   rechercher(name:string){
-    if(name === 'Thomas')
-    this.tabMatricule = tabMatricule;
-    else this.tabMatricule = null;
+    if(name === 'Thomas'){
+      this.tabMatricule = tabMatricule;
+      this.errorRecherche = false;
+    }
+    else {
+      this.tabMatricule = null;
+      this.errorRecherche = true;
+    }
   }
 
 }
