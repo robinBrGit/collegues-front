@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {tabMatricule} from "../mock/matricules.mock";
+import {Component, OnInit} from '@angular/core';
+import {DataService} from "../data.service";
 
 @Component({
   selector: 'app-recherche-collegue-par-nom',
@@ -7,22 +7,19 @@ import {tabMatricule} from "../mock/matricules.mock";
 })
 export class RechercheParNomComponent implements OnInit {
 
-  tabMatricule:any;
+  tabMatricule:string[];
   errorRecherche:boolean = false;
-  constructor() { }
+  constructor(private dataServ:DataService) { }
 
   ngOnInit() {
   }
 
   rechercher(name:string){
-    if(name === 'Thomas'){
-      this.tabMatricule = tabMatricule;
+    this.tabMatricule = this.dataServ.rechercherParNom(name);
+    if(this.tabMatricule != null && this.tabMatricule.length > 0){
       this.errorRecherche = false;
     }
-    else {
-      this.tabMatricule = null;
-      this.errorRecherche = true;
-    }
+    else this.errorRecherche = true;
   }
 
 }
