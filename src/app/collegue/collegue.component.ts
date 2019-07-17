@@ -17,6 +17,8 @@ export class CollegueComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dataServ.abonnementCollegue()
+        .subscribe(collegue => this.col = collegue);
   }
 
   addNewCollegue(){

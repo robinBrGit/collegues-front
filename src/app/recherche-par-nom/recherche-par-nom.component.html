@@ -11,7 +11,7 @@
     <div class="col-sm-12 col-xl-12">
         <ul class="list-group list-group-flush">
             <div *ngIf="tabMatricule != null">
-                <li *ngFor="let matricule of tabMatricule" class="list-group-item">{{matricule}}</li>
+                    <li *ngFor="let matricule of tabMatricule" class="list-group-item focus" (click)="selectionerMatricule(matricule)">{{matricule}}</li>
             </div>
         </ul>
         <div *ngIf="errorRecherche">
