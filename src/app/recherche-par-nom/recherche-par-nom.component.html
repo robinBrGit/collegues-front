@@ -9,14 +9,24 @@
 </div>
 <div class="row m-2">
     <div class="col-sm-12 col-xl-12">
-        <ul class="list-group list-group-flush">
+        <div class="list-group">
             <div *ngIf="tabMatricule != null">
-                    <li *ngFor="let matricule of tabMatricule" class="list-group-item focus" (click)="selectionerMatricule(matricule)">{{matricule}}</li>
+                    <a *ngFor="let matricule of tabMatricule" href="#" class="list-group-item list-group-item-action" (click)="selectionerMatricule(matricule)">{{matricule}}</a>
             </div>
-        </ul>
+        </div>
         <div *ngIf="errorRecherche">
             <div class="alert alert-primary" role="alert">
                 Collegue introuvable
+            </div>
+        </div>
+        <div *ngIf="errorServer">
+            <div class="alert alert-danger" role="alert">
+               Connection impossible
+            </div>
+        </div>
+        <div *ngIf="errorMatricule">
+            <div class="alert alert-warning" role="alert">
+                {{errorMatriculeMsg}}
             </div>
         </div>
     </div>

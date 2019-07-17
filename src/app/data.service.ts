@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Collegue} from "./models/collegue";
-import {Observable, Subject} from "rxjs";
-import {lesCollegues, unCollegue} from "./mock/collegues.mock";
+import {Observable, of, Subject} from "rxjs";
+import {unCollegue} from "./mock/collegues.mock";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../environments/environment";
 
@@ -10,12 +10,14 @@ import {environment} from "../environments/environment";
 })
 export class DataService {
 
-
+  private colleguesCached:Map<string,Collegue> = new Map<string, Collegue>();
   private collegueSelectionne = new Subject<Collegue>();
   constructor(private httpClient : HttpClient) {
   }
 
-  publierCollegue(collegue : Collegue){
+  publierCollegue(matricule:string,collegue : Collegue){
+    if(!this.colleguesCached.has(matricule))
+      this.colleguesCached.set(matricule,collegue);
     this.collegueSelectionne.next(collegue);
   }
 
@@ -24,6 +26,7 @@ export class DataService {
   }
 
   rechercherParNom(name:string) :Observable<string[]>{
+    this.colleguesCached = new Map<string, Collegue>();
     const URL_BACKEND = environment.backendUrl;
     return this.httpClient
         .get<string[]>(`${URL_BACKEND}?nom=${name}`)
@@ -36,7 +39,12 @@ export class DataService {
 
   rechercherCollegueParMatricule(matricule : string) : Observable<Collegue>{
     const URL_BACKEND = environment.backendUrl;
-    return this.httpClient
-        .get<Collegue>(`${URL_BACKEND}/${matricule}`)
+    if(!this.colleguesCached.has(matricule)){
+      return this.httpClient
+          .get<Collegue>(`${URL_BACKEND}/${matricule}`);
+    }
+    else return of(this.colleguesCached.get(matricule));
+
+
   }
 }
