@@ -6,6 +6,9 @@ import {AppComponent} from './app.component';
 import {CollegueComponent} from './collegue/collegue.component';
 import { RechercheParNomComponent } from './recherche-par-nom/recherche-par-nom.component';
 import {HttpClientModule} from "@angular/common/http";
+import {FormsModule} from "@angular/forms";
+import { CreerCollegueComponent } from './creer-collegue/creer-collegue.component';
+import { GestionCollegueComponent } from './gestion-collegue/gestion-collegue.component';
 
 
 @NgModule({
@@ -13,10 +16,12 @@ import {HttpClientModule} from "@angular/common/http";
         AppComponent,
         CollegueComponent,
         RechercheParNomComponent,
+        GestionCollegueComponent,
+        CreerCollegueComponent
 
     ],
     imports: [
-        BrowserModule, NgbModule , HttpClientModule
+        BrowserModule, NgbModule , HttpClientModule , FormsModule
     ],
     providers: [],
     bootstrap: [AppComponent]

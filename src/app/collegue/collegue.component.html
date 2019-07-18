@@ -1,63 +1,94 @@
-<div class="col-md-12 col-lg-12 col-xl-12">
+<div class="col-12">
     <div class="card mb-4 shadow-sm">
         <div class="card-header">
         </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-4">
-                    <img class="img-fluid" src="{{col.photoUrl}}"
-                         alt="photo">
-                </div>
-                <div class="col-8">
-                    <dl class="row">
-                        <dt class="col-sm-3 col-xl-4">Matricule</dt>
-                        <dd class="col-sm-9 col-xl-8">{{col.matricule}}</dd>
+        <div *ngIf="col != null">
+            <div class="card-body">
+                <form #formModifier="ngForm">
+                    <div class="row">
+                        <div class="col-4">
+                            <img *ngIf="col != null" class="img-fluid" src="{{col.photoUrl}}"
+                                 alt="photo">
+                        </div>
+                        <div class="col-8">
 
-                        <dt class="col-sm-3 col-xl-4">Nom</dt>
-                        <dd class="col-sm-9 col-xl-8">{{col.nom | uppercase}}</dd>
+                            <dl class="row">
+                                <dt class="col-4">Matricule</dt>
+                                <dd class="col-8">{{col.matricule}}</dd>
 
-                        <dt class="col-sm-3 col-xl-4">Prénoms</dt>
-                        <dd class="col-sm-9 col-xl-8">{{col.prenoms}}
+                                <dt class="col-4">Nom</dt>
+                                <dd class="col-8">{{col.nom | uppercase}}</dd>
 
-                        <dt class="col-sm-3 col-xl-4">Date de naissance</dt>
-                        <dd class="col-sm-9 col-xl-8">{{col.dateDeNaissance | date:'dd/MM/yyyy'}}</dd>
-                        <div *ngIf="isUpdate; then updateBlock else readBlock"></div>
+                                <dt class="col-4">Prénoms</dt>
+                                <dd class="col-8">{{col.prenoms}}
 
-                        <ng-template #updateBlock>
-                            <dt class="col-sm-3 col-xl-4">Email</dt>
-                            <dd class="col-sm-9 col-xl-8"><input type="email" class="form-control" name="email" id="email"></dd>
+                                <dt class="col-4">Date de naissance</dt>
+                                <dd class="col-8">{{col.dateDeNaissance | date:'dd/MM/yyyy'}}</dd>
 
-                            <dt class="col-sm-3 col-xl-4">Photo Url</dt>
-                            <dd class="col-sm-9 col-xl-8"><input type="text" class="form-control" name="urlPhoto" id="urlPhoto"></dd>
+                                <div *ngIf="isUpdate; then updateBlock else readBlock"></div>
 
-                        </ng-template>
-
-                        <ng-template #readBlock>
-                            <dt class="col-sm-3 col-xl-4">Email</dt>
-                            <dd class="col-sm-9 col-xl-8">{{col.email}}</dd>
-                        </ng-template>
+                                <ng-template #updateBlock>
 
 
-                    </dl>
-                </div>
+                                    <label for="email" class="col-4"><strong>Email</strong></label>
+                                    <div class="col-8">
+                                        <input type="email" [class.is-invalid]="(email.dirty && email.invalid) || error.get('email')" class="form-control" [(ngModel)]="colUpdate.email"
+                                               #email="ngModel" required name="email" id="email">
+                                        <div *ngIf="(email.dirty && email.invalid) || error.get('email')" class="invalid-feedback">
+                                            L'email est invalide.
+                                        </div>
+                                    </div>
+
+
+                                    <label for="urlPhoto" class="col-4 "><strong>Url de la photo</strong></label>
+                                    <div class="col-8">
+                                        <input type="text" class="form-control" [(ngModel)]="colUpdate.photoUrl"
+                                               #urlPhoto="ngModel" required minlength="7" name="urlPhoto"
+                                               [class.is-invalid]="(urlPhoto.dirty && urlPhoto.invalid) || error.get('photoUrl')"
+                                               id="urlPhoto">
+                                        <div *ngIf="(urlPhoto.dirty && urlPhoto.invalid) || error.get('photoUrl')" class="invalid-feedback">
+                                            L'url photo est invalide.
+                                        </div>
+
+
+                                    </div>
+
+
+                                </ng-template>
+
+                                <ng-template #readBlock>
+                                    <dt class="col-sm-3 col-xl-4">Email</dt>
+                                    <dd class="col-sm-9 col-xl-8">{{col.email}}</dd>
+                                </ng-template>
+
+
+                            </dl>
+
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col text-right m-2">
+                            <div *ngIf="isUpdate;then validateButton else updateButton"></div>
+                            <ng-template #updateButton>
+                                <button type="button" class="btn btn-dark" (click)="updateCollegue(col)">Editer</button>
+                            </ng-template>
+                            <ng-template #validateButton>
+                                <div *ngIf="formModifier.dirty && formModifier.invalid" class="invalid-feedback">
+                                    Au moins un champ du formulaire est invalide.
+                                </div>
+                                <button [disabled]="formModifier.invalid" type="button" class="btn btn-dark"
+                                        (click)="validateCollegue()">Valider
+                                </button>
+
+                            </ng-template>
+
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-        <div class="row">
 
-            <div class="col-4 text-right m-2" *ngIf="!isUpdate">
-                <a href="#" (click)="addNewCollegue()">Créer un nouveau collègue</a>
-            </div>
-            <div class="col text-right m-2">
-                <div *ngIf="isUpdate;then validateButton else updateButton"></div>
-                <ng-template #updateButton>
-                    <button type="button" class="btn btn-dark" (click)="updateCollegue(col)">Editer</button>
-                </ng-template>
-                <ng-template #validateButton>
-                    <button type="button" class="btn btn-dark" (click)="validateCollegue()">Valider</button>
-                </ng-template>
-
-            </div>
-        </div>
     </div>
 
 </div>

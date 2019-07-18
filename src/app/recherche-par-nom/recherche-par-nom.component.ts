@@ -10,9 +10,9 @@ export class RechercheParNomComponent implements OnInit {
 
     tabMatricule: string[];
     errorRecherche: boolean = false;
-    errorServer:boolean = false;
-    errorMatricule:boolean = false;
-    errorMatriculeMsg:string;
+    errorServer: boolean = false;
+    errorMatricule: boolean = false;
+    errorMatriculeMsg: string;
 
     constructor(private dataServ: DataService) {
     }
@@ -38,7 +38,7 @@ export class RechercheParNomComponent implements OnInit {
         this.dataServ.rechercherCollegueParMatricule(matricule).subscribe(collegue => {
             this.errorMatricule = false;
             this.dataServ.publierCollegue(matricule, collegue);
-        },(err:HttpErrorResponse) => {
+        }, (err: HttpErrorResponse) => {
             this.errorMatricule = true;
             this.errorMatriculeMsg = err.error;
         })

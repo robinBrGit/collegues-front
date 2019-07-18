@@ -1,0 +1,123 @@
+<div class="col-12">
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+        </div>
+        <div class="card-body">
+            <form #formAjouter="ngForm">
+                <div class="row">
+                    <div class="col-4">
+                        <img class="img-fluid" src="{{collegueAdd.photoUrl}}"
+                             alt="photo">
+                    </div>
+                    <div class="col-8">
+                        <div class="form-group row">
+                            <label for="nom" class="col-4 col-form-label">Nom :</label>
+                            <div class="col-8">
+                                <input type="text" class="form-control" [(ngModel)]="collegueAdd.nom" name="nom"
+                                       #nom="ngModel"
+                                       minlength="2"
+                                       id="nom"
+                                       [class.is-invalid]="(nom.dirty && nom.invalid)||backEndErrors.nom"
+                                       value="" [ngModelOptions]="{updateOn: 'blur'}" required>
+                                <div *ngIf="nom.dirty && nom.invalid" class="invalid-feedback">
+                                    Nom invalide.
+                                </div>
+                                <div *ngIf="backEndErrors.nom" class="invalid-feedback">
+                                    {{backEndErrors.nom}}
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="prenoms" class="col-4 col-form-label">Prénoms :</label>
+                            <div class="col-8">
+                                <input type="text" class="form-control" [(ngModel)]="collegueAdd.prenoms"
+                                       id="prenoms" #prenom="ngModel"
+                                       [ngModelOptions]="{updateOn: 'blur'}"
+                                       minlength="2"
+                                       [class.is-invalid]="(prenom.dirty && prenom.invalid)||backEndErrors.prenoms"
+                                       name="prenoms" required>
+                                <div *ngIf="prenom.dirty && prenom.invalid" class="invalid-feedback">
+                                    Prenom invalide.
+                                </div>
+                                <div *ngIf="backEndErrors.prenoms" class="invalid-feedback">
+                                    {{backEndErrors.prenoms}}
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="dateNaissance" class="col-4 col-form-label">Date de naissance :</label>
+                            <div class="col-8">
+                                <input type="date" class="form-control"
+                                       [(ngModel)]="collegueAdd.dateDeNaissance" #dateNaissance="ngModel"
+                                       id="dateNaissance" value=""
+                                       [class.is-invalid]="(dateNaissance.dirty && dateNaissance.invalid)||backEndErrors.dateNaissance"
+                                       [ngModelOptions]="{updateOn: 'blur'}" name="dateNaissance" required>
+                                <div *ngIf="dateNaissance.dirty && dateNaissance.invalid " class="invalid-feedback">
+                                    Date de naissance invalide.
+                                </div>
+                                <div *ngIf="backEndErrors.dateNaissance" class="invalid-feedback">
+                                    {{backEndErrors.dateNaissance}}
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email" class="col-4 col-form-label">Email :</label>
+                            <div class="col-8">
+                                <input type="email" class="form-control" [(ngModel)]="collegueAdd.email"
+                                       #email="ngModel" required name="email"
+                                       [class.is-invalid]="(email.dirty && email.invalid)|| backEndErrors.email"
+                                       [ngModelOptions]="{updateOn: 'blur'}" id="email">
+                                <div *ngIf="email.dirty && email.invalid" class="invalid-feedback">
+                                    L'email est invalide.
+                                </div>
+                                <div *ngIf="backEndErrors.email" class="invalid-feedback">
+                                    {{backEndErrors.email}}
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="urlPhoto" class="col-4 col-form-label">Url photo :</label>
+                            <div class="col-8">
+                                <input type="text" class="form-control" [(ngModel)]="collegueAdd.photoUrl"
+                                       #urlPhoto="ngModel" required minlength="7" name="urlPhoto"
+                                       [class.is-invalid]="(urlPhoto.dirty && urlPhoto.invalid) || backEndErrors.photoUrl"
+                                       [ngModelOptions]="{updateOn: 'blur'}"
+                                       id="urlPhoto">
+                                <div *ngIf="urlPhoto.dirty && urlPhoto.invalid" class="invalid-feedback">
+                                    L'url photo est invalide.
+                                </div>
+                                <div *ngIf="backEndErrors.photoUrl" class="invalid-feedback">
+                                    {{backEndErrors.photoUrl}}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div *ngIf="backEndErrors.offline">
+                        <div class="alert alert-danger" role="alert">
+                            Connexion impossible
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <div class="col text-right m-2">
+                        <button [disabled]="formAjouter.invalid" type="button" class="btn btn-dark"
+                                (click)="ajouterCollegue(formAjouter)">Créer
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+

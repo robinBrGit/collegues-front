@@ -1,13 +1,16 @@
 import {Injectable} from '@angular/core';
-import {Collegue} from "./models/collegue";
+import {Collegue, CollegueAdd, CollegueUpdate} from "./models/collegue";
 import {Observable, of, Subject} from "rxjs";
 import {unCollegue} from "./mock/collegues.mock";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../environments/environment";
+import {httpOptions} from "./config/config.http";
 
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class DataService {
 
   private colleguesCached:Map<string,Collegue> = new Map<string, Collegue>();
@@ -44,7 +47,26 @@ export class DataService {
           .get<Collegue>(`${URL_BACKEND}/${matricule}`);
     }
     else return of(this.colleguesCached.get(matricule));
+  }
 
+  updateCollegue(collegue:CollegueUpdate) : Observable<string>{
 
+    const URL_BACKEND = environment.backendUrl;
+    return this.httpClient.patch(`${URL_BACKEND}/${collegue.matricule}`,collegue,{
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      }),
+      responseType: 'text'
+    });
+  }
+
+  ajouterCollegue(collegue:CollegueAdd) : Observable<string>{
+    const URL_BACKEND = environment.backendUrl;
+    return this.httpClient.post(URL_BACKEND,collegue,{
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      }),
+      responseType: 'text'
+    });
   }
 }

@@ -1,0 +1,13 @@
+<div *ngIf="creerCollegue;then ajouterCollegueApp else afficherCollegueApp "></div>
+<ng-template #ajouterCollegueApp>
+    <app-creer-collegue></app-creer-collegue>
+</ng-template>
+<ng-template #afficherCollegueApp>
+    <app-collegue></app-collegue>
+</ng-template>
+
+
+<div *ngIf="creerCollegue; else elseBlock"><a href="#" (click)="afficherCollegue()">Afficher collègue</a></div>
+<ng-template #elseBlock><a href="#" (click)="afficherAjoutCollegue()">Créer un nouveau collègue</a></ng-template>
+
+
