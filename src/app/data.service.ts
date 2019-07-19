@@ -5,6 +5,7 @@ import {unCollegue} from "./mock/collegues.mock";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../environments/environment";
 import {httpOptions} from "./config/config.http";
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,7 @@ export class DataService {
     this.colleguesCached = new Map<string, Collegue>();
     const URL_BACKEND = environment.backendUrl;
     return this.httpClient
-        .get<string[]>(`${URL_BACKEND}?nom=${name}`)
+        .get<string[]>(`${URL_BACKEND}collegues?nom=${name}`)
   }
 
   recupererCollegueCourant(): Collegue {
@@ -44,7 +45,7 @@ export class DataService {
     const URL_BACKEND = environment.backendUrl;
     if(!this.colleguesCached.has(matricule)){
       return this.httpClient
-          .get<Collegue>(`${URL_BACKEND}/${matricule}`);
+          .get<Collegue>(`${URL_BACKEND}collegues/${matricule}`);
     }
     else return of(this.colleguesCached.get(matricule));
   }
@@ -52,7 +53,7 @@ export class DataService {
   updateCollegue(collegue:CollegueUpdate) : Observable<string>{
 
     const URL_BACKEND = environment.backendUrl;
-    return this.httpClient.patch(`${URL_BACKEND}/${collegue.matricule}`,collegue,{
+    return this.httpClient.patch(`${URL_BACKEND}collegues/${collegue.matricule}`,collegue,{
       headers: new HttpHeaders({
         'Content-Type':  'application/json'
       }),
@@ -62,11 +63,26 @@ export class DataService {
 
   ajouterCollegue(collegue:CollegueAdd) : Observable<string>{
     const URL_BACKEND = environment.backendUrl;
-    return this.httpClient.post(URL_BACKEND,collegue,{
+    return this.httpClient.post(`${URL_BACKEND}collegues`,collegue,{
       headers: new HttpHeaders({
         'Content-Type':  'application/json'
       }),
       responseType: 'text'
     });
+  }
+
+  isEmailExist(email:string) : Observable<boolean>{
+    const URL_BACKEND = environment.backendUrl;
+      return this.httpClient.post(`${URL_BACKEND}email`,email,{
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      }),
+      responseType: 'text'
+    }).pipe(
+        map(
+            texte => texte === 'true'
+        )
+      );
+
   }
 }

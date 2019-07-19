@@ -66,12 +66,16 @@
                         <div class="form-group row">
                             <label for="email" class="col-4 col-form-label">Email :</label>
                             <div class="col-8">
-                                <input type="email" class="form-control" [(ngModel)]="collegueAdd.email"
+                                <input type="email" appEmailValidator class="form-control"
+                                       [(ngModel)]="collegueAdd.email"
                                        #email="ngModel" required name="email"
                                        [class.is-invalid]="(email.dirty && email.invalid)|| backEndErrors.email"
                                        [ngModelOptions]="{updateOn: 'blur'}" id="email">
                                 <div *ngIf="email.dirty && email.invalid" class="invalid-feedback">
-                                    L'email est invalide.
+                                    <div *ngIf="email.errors.emailExist;else emailError">
+                                        Cette email existe déja
+                                    </div>
+                                    <ng-template #emailError>L'email est invalide.</ng-template>
                                 </div>
                                 <div *ngIf="backEndErrors.email" class="invalid-feedback">
                                     {{backEndErrors.email}}
@@ -82,11 +86,13 @@
                         <div class="form-group row">
                             <label for="urlPhoto" class="col-4 col-form-label">Url photo :</label>
                             <div class="col-8">
-                                <input type="text" class="form-control" [(ngModel)]="collegueAdd.photoUrl"
+                                <input type="text" appUrlValidator class="form-control"
+                                       [(ngModel)]="collegueAdd.photoUrl"
                                        #urlPhoto="ngModel" required minlength="7" name="urlPhoto"
                                        [class.is-invalid]="(urlPhoto.dirty && urlPhoto.invalid) || backEndErrors.photoUrl"
                                        [ngModelOptions]="{updateOn: 'blur'}"
                                        id="urlPhoto">
+
                                 <div *ngIf="urlPhoto.dirty && urlPhoto.invalid" class="invalid-feedback">
                                     L'url photo est invalide.
                                 </div>

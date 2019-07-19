@@ -9,6 +9,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import { CreerCollegueComponent } from './creer-collegue/creer-collegue.component';
 import { GestionCollegueComponent } from './gestion-collegue/gestion-collegue.component';
+import { UrlValidatorDirective } from './validators/url-validator.directive';
+import { EmailValidatorDirective } from './validators/email-validator.directive';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { GestionCollegueComponent } from './gestion-collegue/gestion-collegue.co
         CollegueComponent,
         RechercheParNomComponent,
         GestionCollegueComponent,
-        CreerCollegueComponent
+        CreerCollegueComponent,
+        UrlValidatorDirective,
+        EmailValidatorDirective
 
     ],
     imports: [
