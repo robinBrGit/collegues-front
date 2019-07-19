@@ -11,6 +11,12 @@ import { CreerCollegueComponent } from './creer-collegue/creer-collegue.componen
 import { GestionCollegueComponent } from './gestion-collegue/gestion-collegue.component';
 import { UrlValidatorDirective } from './validators/url-validator.directive';
 import { EmailValidatorDirective } from './validators/email-validator.directive';
+import { MenuComponent } from './menu/menu.component';
+import { AccueilComponent } from './accueil/accueil.component';
+import {RouterModule} from "@angular/router";
+import {ROUTES} from "./app.routes";
+import { GallerieCollegueComponent } from './gallerie-collegue/gallerie-collegue.component';
+import { CollegueDetailsComponent } from './collegue-details/collegue-details.component';
 
 
 @NgModule({
@@ -21,11 +27,15 @@ import { EmailValidatorDirective } from './validators/email-validator.directive'
         GestionCollegueComponent,
         CreerCollegueComponent,
         UrlValidatorDirective,
-        EmailValidatorDirective
+        EmailValidatorDirective,
+        MenuComponent,
+        AccueilComponent,
+        GallerieCollegueComponent,
+        CollegueDetailsComponent
 
     ],
     imports: [
-        BrowserModule, NgbModule , HttpClientModule , FormsModule
+        BrowserModule, NgbModule , HttpClientModule , FormsModule, RouterModule.forRoot(ROUTES)
     ],
     providers: [],
     bootstrap: [AppComponent]

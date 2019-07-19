@@ -7,7 +7,7 @@
 </ng-template>
 
 
-<div *ngIf="creerCollegue; else elseBlock"><a href="#" (click)="afficherCollegue()">Afficher collègue</a></div>
-<ng-template #elseBlock><a href="#" (click)="afficherAjoutCollegue()">Créer un nouveau collègue</a></ng-template>
+<div *ngIf="creerCollegue; else elseBlock"><button type="button" (click)="afficherCollegue()" class="btn btn-dark">Afficher collègue</button></div>
+<ng-template #elseBlock><button type="button" (click)="afficherAjoutCollegue()" class="btn btn-dark">Créer un nouveau collègue</button></ng-template>
 
 

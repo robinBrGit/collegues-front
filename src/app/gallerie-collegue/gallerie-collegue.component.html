@@ -1,0 +1,8 @@
+<div class="card-columns">
+    <div *ngFor="let photoCol of photoCollegues">
+        <div class="card">
+            <a routerLink="/gallerie/{{photoCol.matricule}}"><img src="{{photoCol.photoUrl}}" class="card-img-top" alt="..."></a>
+        </div>
+    </div>
+
+</div>

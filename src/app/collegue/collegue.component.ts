@@ -28,9 +28,6 @@ export class CollegueComponent implements OnInit,OnDestroy {
             });
     }
 
-    addNewCollegue() {
-        console.log("Création d'un nouveau collègue");
-    }
 
     updateCollegue(col: Collegue) {
         this.isUpdate = true;

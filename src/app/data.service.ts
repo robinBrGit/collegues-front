@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Collegue, CollegueAdd, CollegueUpdate} from "./models/collegue";
+import {Collegue, CollegueAdd, CollegueUpdate, PhotoDTO} from "./models/collegue";
 import {Observable, of, Subject} from "rxjs";
 import {unCollegue} from "./mock/collegues.mock";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
@@ -84,5 +84,10 @@ export class DataService {
         )
       );
 
+  }
+
+  getPhotosCollegues() : Observable<PhotoDTO[]>{
+    const URL_BACKEND = environment.backendUrl;
+    return this.httpClient.get<PhotoDTO[]>(`${URL_BACKEND}collegues/photos`);
   }
 }
