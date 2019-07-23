@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {CollegueIdentite} from "../models/collegue";
+import {Subscription} from "rxjs";
+import {AuthenticationService} from "../authentication.service";
 
 @Component({
   selector: 'app-gestion-collegue',
@@ -7,10 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GestionCollegueComponent implements OnInit {
 
+  collIdent:CollegueIdentite;
+  actionSub:Subscription;
   creerCollegue:boolean = false;
-  constructor() { }
+  constructor(private authService:AuthenticationService) { }
 
   ngOnInit() {
+    this.actionSub = this.authService.abonnementCollegue()
+        .subscribe(collegueIdent=>{
+          this.collIdent = collegueIdent;
+        })
   }
 
   afficherAjoutCollegue(){

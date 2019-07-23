@@ -1,20 +1,20 @@
 <div class="container ">
     <div class="jumbotron">
-        <img src="{{col.photoUrl}}" class="img-fluid " alt="">
+        <img src="{{col?.photoUrl}}" class="img-fluid " alt="">
         <hr class="my-4">
 
         <dl class="row">
             <dt class="col-4">Nom</dt>
-            <dd class="col-8">{{col.nom | uppercase}}</dd>
+            <dd class="col-8">{{col?.nom | uppercase}}</dd>
 
             <dt class="col-4">Prénoms</dt>
-            <dd class="col-8">{{col.prenoms}}</dd>
+            <dd class="col-8">{{col?.prenoms}}</dd>
 
             <dt class="col-4">Date de naissance</dt>
-            <dd class="col-8">{{col.dateDeNaissance | date:'dd/MM/yyyy'}}</dd>
+            <dd class="col-8">{{col?.dateDeNaissance | date:'dd/MM/yyyy'}}</dd>
 
             <dt class="col-4">Email</dt>
-            <dd class="col-8">{{col.email}}</dd>
+            <dd class="col-8">{{col?.email}}</dd>
         </dl>
 
     </div>

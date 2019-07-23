@@ -1,10 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Collegue, CollegueAdd, CollegueUpdate, PhotoDTO} from "./models/collegue";
 import {Observable, of, Subject} from "rxjs";
-import {unCollegue} from "./mock/collegues.mock";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../environments/environment";
-import {httpOptions} from "./config/config.http";
 import {map} from "rxjs/operators";
 
 @Injectable({
@@ -34,11 +32,6 @@ export class DataService {
     const URL_BACKEND = environment.backendUrl;
     return this.httpClient
         .get<string[]>(`${URL_BACKEND}collegues?nom=${name}`)
-  }
-
-  recupererCollegueCourant(): Collegue {
-    // TODO retourner le collègue fictif à partir du fichier `src/app/mock/collegues.mock.ts`.
-    return unCollegue;
   }
 
   rechercherCollegueParMatricule(matricule : string) : Observable<Collegue>{

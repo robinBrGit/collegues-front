@@ -6,8 +6,8 @@
     <app-collegue></app-collegue>
 </ng-template>
 
-
-<div *ngIf="creerCollegue; else elseBlock"><button type="button" (click)="afficherCollegue()" class="btn btn-dark">Afficher collègue</button></div>
-<ng-template #elseBlock><button type="button" (click)="afficherAjoutCollegue()" class="btn btn-dark">Créer un nouveau collègue</button></ng-template>
+<div *ngIf="collIdent && creerCollegue && collIdent.roles.includes('ROLE_ADMIN')"><button type="button" (click)="afficherCollegue()" class="btn btn-dark">Afficher collègue</button></div>
+<ng-container *ngIf="collIdent && !creerCollegue && collIdent.roles.includes('ROLE_ADMIN')">
+    <button type="button" (click)="afficherAjoutCollegue()" class="btn btn-dark">Créer un nouveau collègue</button></ng-container>
 
 

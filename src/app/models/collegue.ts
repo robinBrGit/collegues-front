@@ -39,3 +39,12 @@ export class PhotoDTO {
 
     }
 }
+
+export class CollegueIdentite {
+    constructor(public matricule?:string,
+                public nom?:string,
+                public prenoms?:string,
+                public roles?:string[]){
+
+    }
+}

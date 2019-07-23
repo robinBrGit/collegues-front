@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthenticationService} from "../authentication.service";
+import {Router} from "@angular/router";
+import {catchError} from "rxjs/operators";
+import {HttpErrorResponse} from "@angular/common/http";
+import {Subscription} from "rxjs";
+import {CollegueIdentite} from "../models/collegue";
 
 @Component({
   selector: 'app-menu',
@@ -7,9 +13,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  collIdent:CollegueIdentite;
+  actionSub:Subscription;
+  constructor(private authService :AuthenticationService,
+              private router:Router) { }
 
   ngOnInit() {
+    this.actionSub = this.authService.abonnementCollegue()
+        .subscribe(collegueIdent=>{
+          this.collIdent = collegueIdent;
+        })
+  }
+
+  logout(){
+    this.authService.logout().subscribe(()=>{
+      this.authService.resetCollegue();
+      this.router.navigate(['/login']);
+    },(err:HttpErrorResponse)=>{
+      console.log("deconnexion impossible");
+    })
   }
 
 }

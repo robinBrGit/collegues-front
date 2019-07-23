@@ -3,10 +3,25 @@
         <img src="assets/img/icon_32.png" width="30" height="30" alt="logo">
     </a>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-            <a class="nav-item nav-link active" routerLink="/accueil">Accueil </a>
-            <a class="nav-item nav-link" routerLink="/gallerie">Gallerie</a>
-            <a class="nav-item nav-link" routerLink="/apropos">A propos</a>
-        </div>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item ">
+                <a class="nav-item nav-link active" routerLink="/accueil">Accueil </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-item nav-link" routerLink="/gallerie">Gallerie</a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-item nav-link" routerLink="/apropos">A propos</a>
+            </li>
+
+        </ul>
+
+
+
+
+        <form *ngIf="collIdent" class="form-inline my-2 my-lg-0">
+            <label >Bonjour {{collIdent.nom}}</label>
+            <button class="btn btn-danger my-2 my-sm-0" (click)="logout()" type="button">Déconnexion</button>
+        </form>
     </div>
 </nav>

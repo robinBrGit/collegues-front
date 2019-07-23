@@ -5,8 +5,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AppComponent} from './app.component';
 import {CollegueComponent} from './collegue/collegue.component';
 import { RechercheParNomComponent } from './recherche-par-nom/recherche-par-nom.component';
-import {HttpClientModule} from "@angular/common/http";
-import {FormsModule} from "@angular/forms";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { CreerCollegueComponent } from './creer-collegue/creer-collegue.component';
 import { GestionCollegueComponent } from './gestion-collegue/gestion-collegue.component';
 import { UrlValidatorDirective } from './validators/url-validator.directive';
@@ -17,6 +17,9 @@ import {RouterModule} from "@angular/router";
 import {ROUTES} from "./app.routes";
 import { GallerieCollegueComponent } from './gallerie-collegue/gallerie-collegue.component';
 import { CollegueDetailsComponent } from './collegue-details/collegue-details.component';
+import { AuthComponent } from './auth/auth.component';
+import {HttpCollegueInterceptor} from "./_helpers/http-interceptor";
+import { AproposComponent } from './apropos/apropos.component';
 
 
 @NgModule({
@@ -31,13 +34,17 @@ import { CollegueDetailsComponent } from './collegue-details/collegue-details.co
         MenuComponent,
         AccueilComponent,
         GallerieCollegueComponent,
-        CollegueDetailsComponent
+        CollegueDetailsComponent,
+        AuthComponent,
+        AproposComponent
 
     ],
     imports: [
-        BrowserModule, NgbModule , HttpClientModule , FormsModule, RouterModule.forRoot(ROUTES)
+        BrowserModule, NgbModule, HttpClientModule, FormsModule, RouterModule.forRoot(ROUTES), ReactiveFormsModule
     ],
-    providers: [],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: HttpCollegueInterceptor, multi: true }
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

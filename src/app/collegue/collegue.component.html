@@ -1,8 +1,8 @@
-<div class="col-12">
+<div *ngIf="col" class="col-12">
     <div class="card mb-4 shadow-sm">
         <div class="card-header">
         </div>
-        <div *ngIf="col != null">
+
             <div class="card-body">
                 <form #formModifier="ngForm">
                     <div class="row">
@@ -87,7 +87,7 @@
                     </div>
                 </form>
             </div>
-        </div>
+
 
     </div>
 
